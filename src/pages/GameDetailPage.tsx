@@ -1,12 +1,10 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
-import { Heading, Spinner } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import ExpandableText from "../components/ExpandableText";
-import DefinitionItem from "../components/Definitionitem";
-import CriticScore from "../components/CriticScore";
 import { GameAttributes } from "../components/GameAttributes";
 import { GameTrailer } from "../components/GameTrailer";
+import GameScreenShot from "../components/GameScreenShot";
 
 function GameDetailPage() {
   const { slug } = useParams();
@@ -16,10 +14,13 @@ function GameDetailPage() {
   if (error || !game) throw error;
   return (
     <>
-      <Heading>{game.name}</Heading>
+      <Heading as="h1" size="xl">
+        {game.name}
+        </Heading>
       <ExpandableText>{game.description_raw}</ExpandableText>
       <GameAttributes game={game} />
       <GameTrailer gameId={game.id} />
+      <GameScreenShot gameId={game.id} />
     </>
   );
 }
